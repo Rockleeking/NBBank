@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblBranchCreateDlg" widgetVar="TblBranchCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTblBranchTitle}">
+            <h:form id="TblBranchCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblBranchController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTblBranchLabel_branchId}" for="branchId" />
+                        <p:inputText id="branchId" value="#{tblBranchController.selected.branchId}" title="#{bundle.CreateTblBranchTitle_branchId}" required="true" requiredMessage="#{bundle.CreateTblBranchRequiredMessage_branchId}"/>
+                        <p:outputLabel value="#{bundle.CreateTblBranchLabel_branchName}" for="branchName" />
+                        <p:inputText id="branchName" value="#{tblBranchController.selected.branchName}" title="#{bundle.CreateTblBranchTitle_branchName}" required="true" requiredMessage="#{bundle.CreateTblBranchRequiredMessage_branchName}"/>
+                        <p:outputLabel value="#{bundle.CreateTblBranchLabel_branchCity}" for="branchCity" />
+                        <p:inputText id="branchCity" value="#{tblBranchController.selected.branchCity}" title="#{bundle.CreateTblBranchTitle_branchCity}" required="true" requiredMessage="#{bundle.CreateTblBranchRequiredMessage_branchCity}"/>
+                        <p:outputLabel value="#{bundle.CreateTblBranchLabel_branchZone}" for="branchZone" />
+                        <p:inputText id="branchZone" value="#{tblBranchController.selected.branchZone}" title="#{bundle.CreateTblBranchTitle_branchZone}" required="true" requiredMessage="#{bundle.CreateTblBranchRequiredMessage_branchZone}"/>
+                        <p:outputLabel value="#{bundle.CreateTblBranchLabel_brachContactNo}" for="brachContactNo" />
+                        <p:inputText id="brachContactNo" value="#{tblBranchController.selected.brachContactNo}" title="#{bundle.CreateTblBranchTitle_brachContactNo}" required="true" requiredMessage="#{bundle.CreateTblBranchRequiredMessage_brachContactNo}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblBranchController.create}" value="#{bundle.Save}" update="display,:TblBranchListForm:datalist,:growl" oncomplete="handleSubmit(args,'TblBranchCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TblBranchCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

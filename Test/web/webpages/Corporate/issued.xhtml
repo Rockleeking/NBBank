@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   
+           
+       <h:form id="TblIssueCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" >
+                       
+                        <p:outputLabel value="Issue Date" for="iDate" />
+                        <p:calendar id="iDate" pattern="MM/dd/yyyy" value="#{iss.selected.IDate}" title="#{bundle.CreateTblIssueLabel_IDate}" style="height: 150px;"  required="true" requiredMessage="#{bundle.CreateTblRequestationRequiredMessage_reqDate}"/>
+                        <p:outputLabel value="Request Id" for="reqId" />
+                        <p:selectOneMenu id="reqId" value="#{iss.reqId.reqId}" required="true" >
+                            <f:selectItems value="#{iss.itemsAvailableSelectOneRequestation}"
+                                           
+                                           var="reqIdItem"
+                                           
+                                           itemValue="#{reqIdItem}" />
+                            <p:ajax update="up" listener="#{iss.iteam()}" process="@this" />
+                        </p:selectOneMenu>                        
+                        <p:outputLabel value="required Item"/>
+                        
+                        <p:outputLabel id="up" value="#{iss.z}"/>
+                        
+                        <p:outputLabel value="Quantity" for="IQty" />
+                        <p:inputText id="IQty" value="#{iss.selected.IQty}" title="#{bundle.CreateTblRequestationLabel_qty}" required="true" requiredMessage="#{bundle.CreateTblRequestationRequiredMessage_reqId}"/>
+                        <p:outputLabel value="Rate" for="rate"  />
+                        <p:inputText id="rate" value="#{iss.selected.rate}" title="#{bundle.CreateTblIssueTitle_rate}" required="true" requiredMessage="#{bundle.CreateTblIssueRequiredMessage_rate}"/>
+                        
+                    </p:panelGrid>
+                    <p:commandButton  action="#{iss.create()}" actionListener="#{npc.issued()}" value="save Order " update="display,:TblIssueCreateForm, :growl, :centerPanel "/>
+                </h:panelGroup>
+       </h:form>
+                     
+    
+</ui>
+

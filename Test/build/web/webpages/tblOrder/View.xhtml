@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblOrderViewDlg" widgetVar="TblOrderViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTblOrderTitle}">
+            <h:form id="TblOrderViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblOrderController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTblOrderLabel_OId}"/>
+                        <h:outputText value="#{tblOrderController.selected.OId}" title="#{bundle.ViewTblOrderTitle_OId}"/>
+                        <h:outputText value="#{bundle.ViewTblOrderLabel_ODate}"/>
+                        <h:outputText value="#{tblOrderController.selected.ODate}" title="#{bundle.ViewTblOrderTitle_ODate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTblOrderLabel_OQty}"/>
+                        <h:outputText value="#{tblOrderController.selected.OQty}" title="#{bundle.ViewTblOrderTitle_OQty}"/>
+                        <h:outputText value="#{bundle.ViewTblOrderLabel_rate}"/>
+                        <h:outputText value="#{tblOrderController.selected.rate}" title="#{bundle.ViewTblOrderTitle_rate}"/>
+                        <h:outputText value="#{bundle.ViewTblOrderLabel_VId}"/>
+                        <h:outputText value="#{tblOrderController.selected.VId}" title="#{bundle.ViewTblOrderTitle_VId}"/>
+                        <h:outputText value="#{bundle.ViewTblOrderLabel_itmId}"/>
+                        <h:outputText value="#{tblOrderController.selected.itmId}" title="#{bundle.ViewTblOrderTitle_itmId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TblOrderViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

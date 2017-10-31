@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+            <h:form id="TblBranchListForm">
+                <p:panel header="#{bundle.ListTblBranchTitle}">
+                    <p:dataTable id="datalist" value="#{tblBranchController.items}" var="item"
+                                 selectionMode="single" selection="#{tblBranchController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.branchId}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="viewButton"/>
+                        <p:ajax event="rowUnselect" update="viewButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblBranchTitle_branchId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.branchId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblBranchTitle_branchName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.branchName}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblBranchTitle_branchCity}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.branchCity}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblBranchTitle_branchZone}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.branchZone}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblBranchTitle_brachContactNo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.brachContactNo}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TblBranchViewForm" oncomplete="PF('TblBranchViewDialog').show()" />
+                            
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            
+            <ui:include src="../tblBranch/View.xhtml"/>
+    </h:body>
+
+</html>

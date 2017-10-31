@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblOrderCreateDlg" widgetVar="TblOrderCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTblOrderTitle}">
+            <h:form id="TblOrderCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblOrderController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTblOrderLabel_OId}" for="OId" />
+                        <p:inputText id="OId" value="#{tblOrderController.selected.OId}" title="#{bundle.CreateTblOrderTitle_OId}" required="true" requiredMessage="#{bundle.CreateTblOrderRequiredMessage_OId}"/>
+                        <p:outputLabel value="#{bundle.CreateTblOrderLabel_ODate}" for="ODate" />
+                        <p:calendar id="ODate" pattern="MM/dd/yyyy" value="#{tblOrderController.selected.ODate}" title="#{bundle.EditTblOrderTitle_ODate}" required="true" requiredMessage="#{bundle.EditTblOrderRequiredMessage_ODate}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateTblOrderLabel_OQty}" for="OQty" />
+                        <p:inputText id="OQty" value="#{tblOrderController.selected.OQty}" title="#{bundle.CreateTblOrderTitle_OQty}" required="true" requiredMessage="#{bundle.CreateTblOrderRequiredMessage_OQty}"/>
+                        <p:outputLabel value="#{bundle.CreateTblOrderLabel_rate}" for="rate" />
+                        <p:inputText id="rate" value="#{tblOrderController.selected.rate}" title="#{bundle.CreateTblOrderTitle_rate}" required="true" requiredMessage="#{bundle.CreateTblOrderRequiredMessage_rate}"/>
+                        <p:outputLabel value="#{bundle.CreateTblOrderLabel_VId}" for="VId" />
+                        <p:selectOneMenu id="VId" value="#{tblOrderController.selected.VId}" required="true" requiredMessage="#{bundle.EditTblOrderRequiredMessage_VId}">
+                            <f:selectItems value="#{tblVendorController.itemsAvailableSelectOne}"
+                                           var="VIdItem"
+                                           itemValue="#{VIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTblOrderLabel_itmId}" for="itmId" />
+                        <p:selectOneMenu id="itmId" value="#{tblOrderController.selected.itmId}" required="true" requiredMessage="#{bundle.EditTblOrderRequiredMessage_itmId}">
+                            <f:selectItems value="#{tblItemsController.itemsAvailableSelectOne}"
+                                           var="itmIdItem"
+                                           itemValue="#{itmIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblOrderController.create}" value="#{bundle.Save}" update="display,:TblOrderListForm:datalist,:growl" oncomplete="handleSubmit(args,'TblOrderCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TblOrderCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

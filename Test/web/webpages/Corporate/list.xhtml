@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="templete.xhtml">
+        <ui:define name="body">
+        <p:panel>
+            
+            <h:form >
+                <p:menu>
+                    <p:menuitem value="Home" actionListener="#{npc.home()}"  update=":centerPanel,:growl"/>
+                <p:submenu label="List"  >                                                                   
+                    <p:menuitem value="BRANCH"  actionListener="#{npc.branch()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="DEPARMENT" actionListener="#{npc.dept()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="ISSUE" actionListener="#{npc.issue()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="ITEMS" actionListener="#{npc.items()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="ORDER" actionListener="#{npc.order()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="REQUESTION"  actionListener="#{npc.requistation()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="STOCK" actionListener="#{npc.stock()}" update=":centerPanel, :growl"/>
+                    <p:menuitem value="VENDOR" actionListener="#{npc.vendor()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="STOCK GENERE" actionListener="#{npc.stockGenere()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="MEMORANDUM" actionListener="#{npc.memo()}" update=":centerPanel,:growl"/>
+                </p:submenu>
+
+
+                </p:menu>
+
+            </h:form>
+        </p:panel>
+            </ui:define>
+    </ui:composition>
+</html>
+

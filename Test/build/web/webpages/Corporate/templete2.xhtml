@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+     <h:head>
+        <title>Welcome to NB Bank</title>
+        <style>
+            .ui-panelgrid .ui-panelgrid-cell{
+                border-style: none;
+                 margin: 0px auto;
+            }
+            .aaa{
+                position: absolute; left: 30%; top: 30%;
+                background-color: #00733b; border-color: #00733b; 
+            }
+            #centerPanel{
+                
+                background-image:url("../../resources/image/nb-bank.jpg");
+                background-repeat: round;
+                background-position: center;
+                opacity:1;
+            }
+            
+            #asd{
+                background:white; 
+                border: 0px none;
+                border-style:none; 
+
+            }
+            #iconOnly{
+                background:white; 
+                border: 0px none;
+                border-style:none; 
+
+            }
+            #iconOnly_content td {
+                
+                border-style: none;
+                padding: 50px;
+
+            }
+            td :hover{
+                background-color:teal ;
+                
+                opacity:0.7;
+                
+            }
+
+            .ui-panelgrid{
+                border-color: #ffffff;
+            }
+            
+        </style>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true" style="border-style:none ">
+            <p:layoutUnit position="north" style="border-style:none">
+                <p:panel id="header" toggleable="true" toggleOrientation="vertical" toggleSpeed="1500" style="; text-align:center; background-color: #00733b; border-color: #00733b  ">
+                    <img src="../../resources/image/nbbank.png" width="120" height="100" alt="nbbank" onclick="" style="float: left"/><br />
+                    <p:outputLabel  value="Inventory Management System" style=" color: white; font-weight:bold ; font-family: sans-serif" /> 
+            
+                </p:panel>
+            </p:layoutUnit>
+            <p:layoutUnit id="centerPanel" position="center" style="border-style:none " >
+             <ui:insert name="center">
+                    <p:outputLabel value="this is center"/>
+             </ui:insert>
+        </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
+

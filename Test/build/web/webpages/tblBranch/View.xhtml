@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblBranchViewDlg" widgetVar="TblBranchViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTblBranchTitle}">
+            <h:form id="TblBranchViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblBranchController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTblBranchLabel_branchId}"/>
+                        <h:outputText value="#{tblBranchController.selected.branchId}" title="#{bundle.ViewTblBranchTitle_branchId}"/>
+                        <h:outputText value="#{bundle.ViewTblBranchLabel_branchName}"/>
+                        <h:outputText value="#{tblBranchController.selected.branchName}" title="#{bundle.ViewTblBranchTitle_branchName}"/>
+                        <h:outputText value="#{bundle.ViewTblBranchLabel_branchCity}"/>
+                        <h:outputText value="#{tblBranchController.selected.branchCity}" title="#{bundle.ViewTblBranchTitle_branchCity}"/>
+                        <h:outputText value="#{bundle.ViewTblBranchLabel_branchZone}"/>
+                        <h:outputText value="#{tblBranchController.selected.branchZone}" title="#{bundle.ViewTblBranchTitle_branchZone}"/>
+                        <h:outputText value="#{bundle.ViewTblBranchLabel_brachContactNo}"/>
+                        <h:outputText value="#{tblBranchController.selected.brachContactNo}" title="#{bundle.ViewTblBranchTitle_brachContactNo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TblBranchViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

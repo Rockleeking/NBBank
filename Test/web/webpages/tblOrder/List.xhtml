@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTblOrderTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="TblOrderListForm">
+                <p:panel header="#{bundle.ListTblOrderTitle}">
+                    <p:dataTable id="datalist" value="#{tblOrderController.items}" var="item"
+                                 selectionMode="single" selection="#{tblOrderController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.OId}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblOrderTitle_OId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.OId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblOrderTitle_ODate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ODate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblOrderTitle_OQty}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.OQty}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblOrderTitle_rate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rate}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblOrderTitle_VId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.VId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblOrderTitle_itmId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itmId}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tblOrderController.prepareCreate}" update=":TblOrderCreateForm" oncomplete="PF('TblOrderCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TblOrderViewForm" oncomplete="PF('TblOrderViewDialog').show()" disabled="#{empty tblOrderController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TblOrderEditForm" oncomplete="PF('TblOrderEditDialog').show()" disabled="#{empty tblOrderController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tblOrderController.destroy}" update=":growl,datalist" disabled="#{empty tblOrderController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

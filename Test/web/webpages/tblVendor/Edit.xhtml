@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblVendorEditDlg" widgetVar="TblVendorEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTblVendorTitle}">
+            <h:form id="TblVendorEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblVendorController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTblVendorLabel_VId}" for="VId" />
+                        <p:inputText id="VId" value="#{tblVendorController.selected.VId}" title="#{bundle.EditTblVendorTitle_VId}" required="true" requiredMessage="#{bundle.EditTblVendorRequiredMessage_VId}"/>
+                        <p:outputLabel value="#{bundle.EditTblVendorLabel_VName}" for="VName" />
+                        <p:inputText id="VName" value="#{tblVendorController.selected.VName}" title="#{bundle.EditTblVendorTitle_VName}" required="true" requiredMessage="#{bundle.EditTblVendorRequiredMessage_VName}"/>
+                        <p:outputLabel value="#{bundle.EditTblVendorLabel_VCity}" for="VCity" />
+                        <p:inputText id="VCity" value="#{tblVendorController.selected.VCity}" title="#{bundle.EditTblVendorTitle_VCity}" required="true" requiredMessage="#{bundle.EditTblVendorRequiredMessage_VCity}"/>
+                        <p:outputLabel value="#{bundle.EditTblVendorLabel_VZone}" for="VZone" />
+                        <p:inputText id="VZone" value="#{tblVendorController.selected.VZone}" title="#{bundle.EditTblVendorTitle_VZone}" required="true" requiredMessage="#{bundle.EditTblVendorRequiredMessage_VZone}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblVendorController.update}" value="#{bundle.Save}" update="display,:TblVendorListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TblVendorEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TblVendorEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

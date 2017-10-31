@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblLoginGenereEditDlg" widgetVar="TblLoginGenereEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTblLoginGenereTitle}">
+            <h:form id="TblLoginGenereEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblLoginGenereController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTblLoginGenereLabel_lgenereId}" for="lgenereId" />
+                        <p:inputText id="lgenereId" value="#{tblLoginGenereController.selected.lgenereId}" title="#{bundle.EditTblLoginGenereTitle_lgenereId}" required="true" requiredMessage="#{bundle.EditTblLoginGenereRequiredMessage_lgenereId}"/>
+                        <p:outputLabel value="#{bundle.EditTblLoginGenereLabel_type}" for="type" />
+                        <p:inputText id="type" value="#{tblLoginGenereController.selected.type}" title="#{bundle.EditTblLoginGenereTitle_type}" required="true" requiredMessage="#{bundle.EditTblLoginGenereRequiredMessage_type}"/>
+                        <p:outputLabel value="#{bundle.EditTblLoginGenereLabel_genere}" for="genere" />
+                        <p:inputText id="genere" value="#{tblLoginGenereController.selected.genere}" title="#{bundle.EditTblLoginGenereTitle_genere}" required="true" requiredMessage="#{bundle.EditTblLoginGenereRequiredMessage_genere}"/>
+                        <p:outputLabel value="#{bundle.EditTblLoginGenereLabel_tblLogin}" for="tblLogin" />
+                        <p:selectOneMenu id="tblLogin" value="#{tblLoginGenereController.selected.tblLogin}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tblLoginController.itemsAvailableSelectOne}"
+                                           var="tblLoginItem"
+                                           itemValue="#{tblLoginItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTblLoginGenereLabel_branchId}" for="branchId" />
+                        <p:selectOneMenu id="branchId" value="#{tblLoginGenereController.selected.branchId}" required="true" requiredMessage="#{bundle.EditTblLoginGenereRequiredMessage_branchId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tblBranchController.itemsAvailableSelectOne}"
+                                           var="branchIdItem"
+                                           itemValue="#{branchIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblLoginGenereController.update}" value="#{bundle.Save}" update="display,:TblLoginGenereListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TblLoginGenereEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TblLoginGenereEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

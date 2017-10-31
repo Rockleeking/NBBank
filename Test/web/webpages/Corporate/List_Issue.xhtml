@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+            <h:form id="TblIssueListForm">
+                <p:panel header="#{bundle.ListTblIssueTitle}">
+                    <p:dataTable id="datalist" value="#{tblIssueController.items}" var="item"
+                                 selectionMode="single" selection="#{tblIssueController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.IId}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblIssueTitle_IId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.IId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblIssueTitle_IDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.IDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblIssueTitle_IQty}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.IQty}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblIssueTitle_rate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.rate}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblIssueTitle_reqId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reqId}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tblIssueController.prepareCreate}" update=":TblIssueCreateForm" oncomplete="PF('TblIssueCreateDialog').show()" disabled="#{empty tblIssueController.selected}"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TblIssueViewForm" oncomplete="PF('TblIssueViewDialog').show()" disabled="#{empty tblIssueController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TblIssueEditForm" oncomplete="PF('TblIssueEditDialog').show()" disabled="#{empty tblIssueController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tblIssueController.destroy}" update=":growl,datalist" disabled="#{empty tblIssueController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+             <ui:include src="../tblIssue/Create.xhtml"/>
+            <ui:include src="../tblIssue/Edit.xhtml"/>
+            <ui:include src="../tblIssue/View.xhtml"/>
+       </h:body>
+
+</html>

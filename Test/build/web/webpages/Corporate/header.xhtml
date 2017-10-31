@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <h:form id="Form">
+                    <p:menubar>
+                <p:menuitem value="Home" actionListener="#{npc.home()}"  update=":centerPanel,:growl"/>
+                <p:submenu label="Maintainance">                                                                   
+                    <p:menuitem value="BRANCH"  actionListener="#{npc.branch()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="DEPARMENT" actionListener="#{npc.dept()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="ISSUE" actionListener="#{npc.issue()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="ITEMS" actionListener="#{npc.items()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="ORDER" actionListener="#{npc.order()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="REQUESTION"  actionListener="#{npc.requistation()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="STOCK" actionListener="#{npc.stock()}" update=":centerPanel, :growl"/>
+                    <p:menuitem value="VENDOR" actionListener="#{npc.vendor()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="STOCK GENERE" actionListener="#{npc.stockGenere()}" update=":centerPanel,:growl"/>
+                    <p:menuitem value="MEMORANDUM" actionListener="#{npc.memo()}" update=":centerPanel,:growl"/>
+                </p:submenu>
+                <p:menuitem value="place order" actionListener="#{npc.orderPage()}"  update=":centerPanel,:growl"/>
+                <p:menuitem value="view braches" actionListener="#{npc.branches()}"  update=":centerPanel,:growl"/>
+                <p:menuitem value="forward issue" actionListener="#{npc.issued()}"  update=":centerPanel,:growl"/>
+                <p:menuitem value="view request" actionListener="#{npc.viewRequest()}"  update=":centerPanel,:growl"/>
+                <p:menuitem value="View Memorandum" actionListener="#{npc.memorandum()}"  update=":centerPanel,:growl"/>
+                <p:menuitem value="View Stock" actionListener="#{npc.viewStock()}"  update=":centerPanel,:growl"/>
+                <p:menuitem value="Log out" actionListener="#{lc.logOut()}" action="#{lc.userLogout()}" update=":centerPanel,:growl"/>
+
+                
+                    </p:menubar>
+        
+    </h:form>
+</ui>
+

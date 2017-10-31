@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   
+           
+       <h:form id="TblOrderListForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" >
+                       
+                        <p:outputLabel value="Date" for="ODate" />
+                        <p:calendar id="ODate" pattern="MM/dd/yyyy" value="#{oc.selected.ODate}" title="#{bundle.CreateTblOrderLabel_ODate}" style="height: 150px;"  required="true" requiredMessage="#{bundle.CreateTblOrderRequiredMessage_ODate}"/>
+                        <p:outputLabel value="Item Name" for="ItmName" />
+                        <p:selectOneMenu id="ItmName" value="#{oc.itemName.itmName}" required="true">
+                            <f:selectItems value="#{oc.itemsAvailableSelectOneitems}"
+                                           var="itmIdItem"
+                                           itemValue="#{itmIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Quantity" for="ItmQty" />
+                        <p:inputText id="ItmQty" value="#{oc.selected.OQty}" title="#{bundle.CreateTblOrderTitle_VId}" required="true" requiredMessage="#{bundle.CreateTblOrderRequiredMessage_VId}"/>
+                        <p:outputLabel value="Vendor Name" for="vName" />
+                        <p:selectOneMenu id="vName" value="#{oc.VName.VName}" required="true">
+                            <f:selectItems value="#{oc.itemsAvailableSelectOneVendor}"
+                                           var="vendorIdItem"
+                                           itemValue="#{itmIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Rate" for="rate"  />
+                        <p:inputText id="rate" value="#{oc.selected.rate}" title="#{bundle.CreateTblOrderTitle_rate}" required="true" requiredMessage="#{bundle.CreateTblOrderRequiredMessage_rate}"/>
+                    </p:panelGrid>
+                    <p:commandButton action="#{oc.create()}" actionListener="#{npc.orderPage()}" value="save Order " update="display,:TblOrderListForm, :growl, :centerPanel "/>
+                </h:panelGroup>
+       </h:form>
+                     
+    
+</ui>
+

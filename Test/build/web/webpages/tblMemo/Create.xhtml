@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblMemoCreateDlg" widgetVar="TblMemoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTblMemoTitle}">
+            <h:form id="TblMemoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblMemoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTblMemoLabel_MId}" for="MId" />
+                        <p:inputText id="MId" value="#{tblMemoController.selected.MId}" title="#{bundle.CreateTblMemoTitle_MId}" required="true" requiredMessage="#{bundle.CreateTblMemoRequiredMessage_MId}"/>
+                        <p:outputLabel value="#{bundle.CreateTblMemoLabel_MDate}" for="MDate" />
+                        <p:calendar id="MDate" pattern="MM/dd/yyyy" value="#{tblMemoController.selected.MDate}" title="#{bundle.EditTblMemoTitle_MDate}" required="true" requiredMessage="#{bundle.EditTblMemoRequiredMessage_MDate}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateTblMemoLabel_MFrom}" for="MFrom" />
+                        <p:inputText id="MFrom" value="#{tblMemoController.selected.MFrom}" title="#{bundle.CreateTblMemoTitle_MFrom}" required="true" requiredMessage="#{bundle.CreateTblMemoRequiredMessage_MFrom}"/>
+                        <p:outputLabel value="#{bundle.CreateTblMemoLabel_MTo}" for="MTo" />
+                        <p:inputText id="MTo" value="#{tblMemoController.selected.MTo}" title="#{bundle.CreateTblMemoTitle_MTo}" required="true" requiredMessage="#{bundle.CreateTblMemoRequiredMessage_MTo}"/>
+                        <p:outputLabel value="#{bundle.CreateTblMemoLabel_detail}" for="detail" />
+                        <p:inputText id="detail" value="#{tblMemoController.selected.detail}" title="#{bundle.CreateTblMemoTitle_detail}" required="true" requiredMessage="#{bundle.CreateTblMemoRequiredMessage_detail}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblMemoController.create}" value="#{bundle.Save}" update="display,:TblMemoListForm:datalist,:growl" oncomplete="handleSubmit(args,'TblMemoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TblMemoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

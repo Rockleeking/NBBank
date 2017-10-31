@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+   
+  
+        
+       
+           
+       <h:form id="TblMemoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" >
+                       
+                        <p:outputLabel value="Date" for="MDate" />
+                        <p:calendar id="MDate" pattern="MM/dd/yyyy" value="#{mc.memo.MDate}" title="#{bundle.EditTblMemoTitle_MDate}" required="true" requiredMessage="#{bundle.EditTblMemoRequiredMessage_MDate}" showOn="button"/>
+                        <p:outputLabel value="Memo From" for="MFrom" />
+                        <p:inputText id="MFrom" value="#{mc.memo.MFrom}" title="#{bundle.CreateTblMemoTitle_MFrom}" required="true" requiredMessage="#{bundle.CreateTblMemoRequiredMessage_MFrom}"/>
+                        <p:outputLabel value="Memo To" for="MTo" />
+                        <p:inputText id="MTo" value="#{mc.memo.MTo}" title="#{bundle.CreateTblMemoTitle_MTo}" required="true" requiredMessage="#{bundle.CreateTblMemoRequiredMessage_MTo}"/>
+                        <p:outputLabel value="Detail" for="detail"  />
+                        <p:inputText id="detail" value="#{mc.memo.detail}" title="#{bundle.CreateTblMemoTitle_detail}" style="height: 150px;"  required="true" requiredMessage="#{bundle.CreateTblMemoRequiredMessage_detail}"/>
+                    </p:panelGrid>
+                    <p:commandButton action="#{mc.create()}" actionListener="#{guc.memorandum()}" value="CREATE memo " update="display,:TblMemoCreateForm, :growl, :centerPanel "/>
+                </h:panelGroup>
+       </h:form>
+                     
+    
+</ui>

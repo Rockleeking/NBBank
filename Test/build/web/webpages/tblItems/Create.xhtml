@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblItemsCreateDlg" widgetVar="TblItemsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTblItemsTitle}">
+            <h:form id="TblItemsCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblItemsController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTblItemsLabel_itmId}" for="itmId" />
+                        <p:inputText id="itmId" value="#{tblItemsController.selected.itmId}" title="#{bundle.CreateTblItemsTitle_itmId}" required="true" requiredMessage="#{bundle.CreateTblItemsRequiredMessage_itmId}"/>
+                        <p:outputLabel value="#{bundle.CreateTblItemsLabel_itmName}" for="itmName" />
+                        <p:inputText id="itmName" value="#{tblItemsController.selected.itmName}" title="#{bundle.CreateTblItemsTitle_itmName}" required="true" requiredMessage="#{bundle.CreateTblItemsRequiredMessage_itmName}"/>
+                        <p:outputLabel value="#{bundle.CreateTblItemsLabel_detail}" for="detail" />
+                        <p:inputText id="detail" value="#{tblItemsController.selected.detail}" title="#{bundle.CreateTblItemsTitle_detail}" required="true" requiredMessage="#{bundle.CreateTblItemsRequiredMessage_detail}"/>
+                        <p:outputLabel value="#{bundle.CreateTblItemsLabel_meta}" for="meta" />
+                        <p:selectOneMenu id="meta" value="#{tblItemsController.selected.meta}" required="true" requiredMessage="#{bundle.EditTblItemsRequiredMessage_meta}">
+                            <f:selectItems value="#{tblStockGenereController.itemsAvailableSelectOne}"
+                                           var="metaItem"
+                                           itemValue="#{metaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblItemsController.create}" value="#{bundle.Save}" update="display,:TblItemsListForm:datalist,:growl" oncomplete="handleSubmit(args,'TblItemsCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TblItemsCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

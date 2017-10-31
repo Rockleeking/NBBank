@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblStockGenereCreateDlg" widgetVar="TblStockGenereCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTblStockGenereTitle}">
+            <h:form id="TblStockGenereCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblStockGenereController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTblStockGenereLabel_GName}" for="GName" />
+                        <p:inputText id="GName" value="#{tblStockGenereController.selected.GName}" title="#{bundle.CreateTblStockGenereTitle_GName}" required="true" requiredMessage="#{bundle.CreateTblStockGenereRequiredMessage_GName}"/>
+                        <p:outputLabel value="#{bundle.CreateTblStockGenereLabel_meta}" for="meta" />
+                        <p:inputText id="meta" value="#{tblStockGenereController.selected.meta}" title="#{bundle.CreateTblStockGenereTitle_meta}" required="true" requiredMessage="#{bundle.CreateTblStockGenereRequiredMessage_meta}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblStockGenereController.create}" value="#{bundle.Save}" update="display,:TblStockGenereListForm:datalist,:growl" oncomplete="handleSubmit(args,'TblStockGenereCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TblStockGenereCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

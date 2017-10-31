@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="login_templete2.xhtml">
+        <ui:define name="center">
+            
+            <p:panel class="aaa" id="contentPanel">
+                
+                <h:form>
+                    <p:fieldset legend="User Login" style="margin-bottom:20px  ">
+                        
+                        <p:panelGrid id="grid" columns="4" style="border:1px none; border-collapse: separate; ">
+                            
+                            <h:outputLabel for="regex" value="USERNAME" style="font-weight:bold"/>                    
+                            <p:inputText id="regex" value="#{lc.regexText}" validatorMessage="Invalid Username.">
+                                <f:validateRegex pattern="^(?=.{6,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?![_.])$" />
+                            </p:inputText>
+                            <p:message for="regex" />
+                            <h:outputText id="ERR1" value="#{lc.error(lc.initial)}" style="color: red"  />
+                            <h:outputLabel for="regex" value="PASSWORD" style="font-weight:bold"/>                    
+                            <p:password id="regex1" value="#{lc.regex1Text}" validatorMessage="InvalidPassword">
+                                <f:validateRegex pattern="^(?=.{6,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?![_.])$" />
+                            </p:password>
+                            <p:message for="regex1" />
+                            <h:outputText id="ERR" value="#{lc.error(lc.initial)}" style="color: red"/>
+                            <p:commandButton  value="submit" update="grid,ERR,ERR1,growl, :contentPanel "  validateClient="true" action="#{lc.checkUser()}" style="margin-right:10px"/>
+                        </p:panelGrid>
+                    </p:fieldset>
+                </h:form>
+              
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+</html>
+

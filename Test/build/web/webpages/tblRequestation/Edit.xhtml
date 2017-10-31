@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblRequestationEditDlg" widgetVar="TblRequestationEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTblRequestationTitle}">
+            <h:form id="TblRequestationEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblRequestationController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTblRequestationLabel_reqId}" for="reqId" />
+                        <p:inputText id="reqId" value="#{tblRequestationController.selected.reqId}" title="#{bundle.EditTblRequestationTitle_reqId}" required="true" requiredMessage="#{bundle.EditTblRequestationRequiredMessage_reqId}"/>
+                        <p:outputLabel value="#{bundle.EditTblRequestationLabel_reqDate}" for="reqDate" />
+                        <p:calendar id="reqDate" pattern="MM/dd/yyyy" value="#{tblRequestationController.selected.reqDate}" title="#{bundle.EditTblRequestationTitle_reqDate}" required="true" requiredMessage="#{bundle.EditTblRequestationRequiredMessage_reqDate}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTblRequestationLabel_qty}" for="qty" />
+                        <p:inputText id="qty" value="#{tblRequestationController.selected.qty}" title="#{bundle.EditTblRequestationTitle_qty}" required="true" requiredMessage="#{bundle.EditTblRequestationRequiredMessage_qty}"/>
+                        <p:outputLabel value="#{bundle.EditTblRequestationLabel_itmId}" for="itmId" />
+                        <p:selectOneMenu id="itmId" value="#{tblRequestationController.selected.itmId}" required="true" requiredMessage="#{bundle.EditTblRequestationRequiredMessage_itmId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tblItemsController.itemsAvailableSelectOne}"
+                                           var="itmIdItem"
+                                           itemValue="#{itmIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTblRequestationLabel_deptId}" for="deptId" />
+                        <p:selectOneMenu id="deptId" value="#{tblRequestationController.selected.deptId}" required="true" requiredMessage="#{bundle.EditTblRequestationRequiredMessage_deptId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tblDeptController.itemsAvailableSelectOne}"
+                                           var="deptIdItem"
+                                           itemValue="#{deptIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblRequestationController.update}" value="#{bundle.Save}" update="display,:TblRequestationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TblRequestationEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TblRequestationEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

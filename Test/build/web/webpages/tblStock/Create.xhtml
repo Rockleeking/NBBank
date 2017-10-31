@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblStockCreateDlg" widgetVar="TblStockCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTblStockTitle}">
+            <h:form id="TblStockCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblStockController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTblStockLabel_SId}" for="SId" />
+                        <p:inputText id="SId" value="#{tblStockController.selected.SId}" title="#{bundle.CreateTblStockTitle_SId}" required="true" requiredMessage="#{bundle.CreateTblStockRequiredMessage_SId}"/>
+                        <p:outputLabel value="#{bundle.CreateTblStockLabel_minQty}" for="minQty" />
+                        <p:inputText id="minQty" value="#{tblStockController.selected.minQty}" title="#{bundle.CreateTblStockTitle_minQty}" required="true" requiredMessage="#{bundle.CreateTblStockRequiredMessage_minQty}"/>
+                        <p:outputLabel value="#{bundle.CreateTblStockLabel_remQty}" for="remQty" />
+                        <p:inputText id="remQty" value="#{tblStockController.selected.remQty}" title="#{bundle.CreateTblStockTitle_remQty}" required="true" requiredMessage="#{bundle.CreateTblStockRequiredMessage_remQty}"/>
+                        <p:outputLabel value="#{bundle.CreateTblStockLabel_rate}" for="rate" />
+                        <p:inputText id="rate" value="#{tblStockController.selected.rate}" title="#{bundle.CreateTblStockTitle_rate}" required="true" requiredMessage="#{bundle.CreateTblStockRequiredMessage_rate}"/>
+                        <p:outputLabel value="#{bundle.CreateTblStockLabel_itmId}" for="itmId" />
+                        <p:selectOneMenu id="itmId" value="#{tblStockController.selected.itmId}" required="true" requiredMessage="#{bundle.EditTblStockRequiredMessage_itmId}">
+                            <f:selectItems value="#{tblItemsController.itemsAvailableSelectOne}"
+                                           var="itmIdItem"
+                                           itemValue="#{itmIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTblStockLabel_meta}" for="meta" />
+                        <p:selectOneMenu id="meta" value="#{tblStockController.selected.meta}" required="true" requiredMessage="#{bundle.EditTblStockRequiredMessage_meta}">
+                            <f:selectItems value="#{tblStockGenereController.itemsAvailableSelectOne}"
+                                           var="metaItem"
+                                           itemValue="#{metaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblStockController.create}" value="#{bundle.Save}" update="display,:TblStockListForm:datalist,:growl" oncomplete="handleSubmit(args,'TblStockCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TblStockCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

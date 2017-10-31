@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblIssueEditDlg" widgetVar="TblIssueEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTblIssueTitle}">
+            <h:form id="TblIssueEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblIssueController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTblIssueLabel_IId}" for="IId" />
+                        <p:inputText id="IId" value="#{tblIssueController.selected.IId}" title="#{bundle.EditTblIssueTitle_IId}" required="true" requiredMessage="#{bundle.EditTblIssueRequiredMessage_IId}"/>
+                        <p:outputLabel value="#{bundle.EditTblIssueLabel_IDate}" for="IDate" />
+                        <p:calendar id="IDate" pattern="MM/dd/yyyy" value="#{tblIssueController.selected.IDate}" title="#{bundle.EditTblIssueTitle_IDate}" required="true" requiredMessage="#{bundle.EditTblIssueRequiredMessage_IDate}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTblIssueLabel_IQty}" for="IQty" />
+                        <p:inputText id="IQty" value="#{tblIssueController.selected.IQty}" title="#{bundle.EditTblIssueTitle_IQty}" required="true" requiredMessage="#{bundle.EditTblIssueRequiredMessage_IQty}"/>
+                        <p:outputLabel value="#{bundle.EditTblIssueLabel_rate}" for="rate" />
+                        <p:inputText id="rate" value="#{tblIssueController.selected.rate}" title="#{bundle.EditTblIssueTitle_rate}" required="true" requiredMessage="#{bundle.EditTblIssueRequiredMessage_rate}"/>
+                        <p:outputLabel value="#{bundle.EditTblIssueLabel_reqId}" for="reqId" />
+                        <p:selectOneMenu id="reqId" value="#{tblIssueController.selected.reqId}" required="true" requiredMessage="#{bundle.EditTblIssueRequiredMessage_reqId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tblRequestationController.itemsAvailableSelectOne}"
+                                           var="reqIdItem"
+                                           itemValue="#{reqIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblIssueController.update}" value="#{bundle.Save}" update="display,:TblIssueListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TblIssueEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TblIssueEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

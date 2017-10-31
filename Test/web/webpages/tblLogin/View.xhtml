@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblLoginViewDlg" widgetVar="TblLoginViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTblLoginTitle}">
+            <h:form id="TblLoginViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblLoginController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTblLoginLabel_lid}"/>
+                        <h:outputText value="#{tblLoginController.selected.lid}" title="#{bundle.ViewTblLoginTitle_lid}"/>
+                        <h:outputText value="#{bundle.ViewTblLoginLabel_user}"/>
+                        <h:outputText value="#{tblLoginController.selected.user}" title="#{bundle.ViewTblLoginTitle_user}"/>
+                        <h:outputText value="#{bundle.ViewTblLoginLabel_pwd}"/>
+                        <h:outputText value="#{tblLoginController.selected.pwd}" title="#{bundle.ViewTblLoginTitle_pwd}"/>
+                        <h:outputText value="#{bundle.ViewTblLoginLabel_genere}"/>
+                        <h:outputText value="#{tblLoginController.selected.genere}" title="#{bundle.ViewTblLoginTitle_genere}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TblLoginViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

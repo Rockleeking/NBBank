@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblLoginGenereCreateDlg" widgetVar="TblLoginGenereCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTblLoginGenereTitle}">
+            <h:form id="TblLoginGenereCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblLoginGenereController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTblLoginGenereLabel_lgenereId}" for="lgenereId" />
+                        <p:inputText id="lgenereId" value="#{tblLoginGenereController.selected.lgenereId}" title="#{bundle.CreateTblLoginGenereTitle_lgenereId}" required="true" requiredMessage="#{bundle.CreateTblLoginGenereRequiredMessage_lgenereId}"/>
+                        <p:outputLabel value="#{bundle.CreateTblLoginGenereLabel_type}" for="type" />
+                        <p:inputText id="type" value="#{tblLoginGenereController.selected.type}" title="#{bundle.CreateTblLoginGenereTitle_type}" required="true" requiredMessage="#{bundle.CreateTblLoginGenereRequiredMessage_type}"/>
+                        <p:outputLabel value="#{bundle.CreateTblLoginGenereLabel_genere}" for="genere" />
+                        <p:inputText id="genere" value="#{tblLoginGenereController.selected.genere}" title="#{bundle.CreateTblLoginGenereTitle_genere}" required="true" requiredMessage="#{bundle.CreateTblLoginGenereRequiredMessage_genere}"/>
+                        <p:outputLabel value="#{bundle.CreateTblLoginGenereLabel_tblLogin}" for="tblLogin" />
+                        <p:selectOneMenu id="tblLogin" value="#{tblLoginGenereController.selected.tblLogin}" >
+                            <f:selectItems value="#{tblLoginController.itemsAvailableSelectOne}"
+                                           var="tblLoginItem"
+                                           itemValue="#{tblLoginItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTblLoginGenereLabel_branchId}" for="branchId" />
+                        <p:selectOneMenu id="branchId" value="#{tblLoginGenereController.selected.branchId}" required="true" requiredMessage="#{bundle.EditTblLoginGenereRequiredMessage_branchId}">
+                            <f:selectItems value="#{tblBranchController.itemsAvailableSelectOne}"
+                                           var="branchIdItem"
+                                           itemValue="#{branchIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblLoginGenereController.create}" value="#{bundle.Save}" update="display,:TblLoginGenereListForm:datalist,:growl" oncomplete="handleSubmit(args,'TblLoginGenereCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TblLoginGenereCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

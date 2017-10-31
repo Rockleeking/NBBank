@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TblDeptCreateDlg" widgetVar="TblDeptCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTblDeptTitle}">
+            <h:form id="TblDeptCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tblDeptController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTblDeptLabel_deptId}" for="deptId" />
+                        <p:inputText id="deptId" value="#{tblDeptController.selected.deptId}" title="#{bundle.CreateTblDeptTitle_deptId}" required="true" requiredMessage="#{bundle.CreateTblDeptRequiredMessage_deptId}"/>
+                        <p:outputLabel value="#{bundle.CreateTblDeptLabel_deptName}" for="deptName" />
+                        <p:inputText id="deptName" value="#{tblDeptController.selected.deptName}" title="#{bundle.CreateTblDeptTitle_deptName}" required="true" requiredMessage="#{bundle.CreateTblDeptRequiredMessage_deptName}"/>
+                        <p:outputLabel value="#{bundle.CreateTblDeptLabel_detail}" for="detail" />
+                        <p:inputText id="detail" value="#{tblDeptController.selected.detail}" title="#{bundle.CreateTblDeptTitle_detail}" required="true" requiredMessage="#{bundle.CreateTblDeptRequiredMessage_detail}"/>
+                        <p:outputLabel value="#{bundle.CreateTblDeptLabel_branchId}" for="branchId" />
+                        <p:selectOneMenu id="branchId" value="#{tblDeptController.selected.branchId}" required="true" requiredMessage="#{bundle.EditTblDeptRequiredMessage_branchId}">
+                            <f:selectItems value="#{tblBranchController.itemsAvailableSelectOne}"
+                                           var="branchIdItem"
+                                           itemValue="#{branchIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tblDeptController.create}" value="#{bundle.Save}" update="display,:TblDeptListForm:datalist,:growl" oncomplete="handleSubmit(args,'TblDeptCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TblDeptCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

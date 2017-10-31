@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+            <h:form id="TblRequestationListForm">
+                
+                <p:panel header="#{bundle.ListTblRequestationTitle}">
+                    <p:dataTable id="datalist" value="#{tblRequestationController.items}" sortBy="#{bundle.ListTblRequestationTitle_reqDate}" sortOrder="descending" var="item"
+                                 selectionMode="single" selection="#{tblRequestationController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.reqId}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"  update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblRequestationTitle_reqDate}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reqDate}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblRequestationTitle_reqId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.reqId}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblRequestationTitle_qty}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.qty}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblRequestationTitle_itmId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.itmId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTblRequestationTitle_deptId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.deptId}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tblRequestationController.prepareCreate}" update=":TblRequestationCreateForm" oncomplete="PF('TblRequestationCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TblRequestationViewForm" oncomplete="PF('TblRequestationViewDialog').show()" disabled="#{empty tblRequestationController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TblRequestationEditForm" oncomplete="PF('TblRequestationEditDialog').show()" disabled="#{empty tblRequestationController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tblRequestationController.destroy}" update=":growl,datalist" disabled="#{empty tblRequestationController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+             <ui:include src="../tblRequestation/Create.xhtml"/>
+            <ui:include src="../tblRequestation/Edit.xhtml"/>
+            <ui:include src="../tblRequestation/View.xhtml"/>
+     </h:body>
+
+</html>

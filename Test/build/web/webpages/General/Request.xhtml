@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   
+       <h:form id="TblRequestationCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        
+                        <p:outputLabel value="Request Date" for="reqDate" />
+                        <p:calendar id="reqDate" pattern="MM/dd/yyyy" value="#{rc.selected.reqDate}" title="#{bundle.EditTblRequestationTitle_reqDate}" required="true" requiredMessage="#{bundle.EditTblRequestationRequiredMessage_reqDate}" showOn="button"/>
+                        <p:outputLabel value="Quantity" for="qty" />
+                        <p:inputText id="qty" value="#{rc.selected.qty}" title="#{bundle.CreateTblRequestationTitle_qty}" required="true" requiredMessage="#{bundle.CreateTblRequestationRequiredMessage_qty}"/>
+                        <p:outputLabel value="item Name" for="itmId" />
+                        <p:selectOneMenu id="itmId" value="#{rc.itemName.itmName}" required="true">
+                            <f:selectItems value="#{rc.itemsAvailableSelectOneitems}"
+                                           var="itmIdItem"
+                                           itemValue="#{itmIdItem}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="dept Name" for="deptId" />
+                        <p:selectOneMenu id="deptId" value="#{rc.deptName.deptName}" required="true">
+                            <f:selectItems value="#{rc.itemsAvailableSelectOneDept}"
+                                           var="deptIdItem"
+                                           itemValue="#{deptIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{rc.create}" value="#{bundle.Save}" update="display,:TblRequestationCreateForm,:centerPanel,:growl" />
+                    
+                </h:panelGroup>
+            </h:form>
+
+    
+</ui>
+
